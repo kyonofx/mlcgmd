@@ -71,7 +71,7 @@ We recommend logging with `wandb` and it is used by default. You need to have a 
 
 ## Train a CGMD simulator
 
-The training configurations, including default hyperparameters can be found at [graphwm/conf](./graphwm/conf). These hyperparameters produce the results reported in our paper, but may not be optimal as we did not do extensive tuning. We trained all models with a single GPU and it takes 3-4 days for the single-chain polymer dataset and 7-10 days for the battery dataset. Multi-GPU training is available (cf. [Tips](https://github.com/kyonofx/mlcgmd/tree/main#tips)) and will likely reduce training time.
+The training configurations, including default hyperparameters can be found at [graphwm/conf](./graphwm/conf). These hyperparameters produce the results reported in our paper, but may not be optimal as we did not do extensive tuning. We trained all models with a single GPU and it takes ~1 day for the single-chain polymer dataset and 7-10 days for the battery dataset. Multi-GPU training is available (cf. [Tips](https://github.com/kyonofx/mlcgmd/tree/main#tips)) and will likely reduce training time.
 
 Train a model with the [default configurations for the single-chain polymer dataset](./graphwm/conf/train.yaml) with the command:
 
