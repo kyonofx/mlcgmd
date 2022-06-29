@@ -1,0 +1,25 @@
+random_seed: 1
+rollout_length: 25000
+batch_size: 10
+num_batches: 5
+deter: False
+save_pos: True
+save_frequency: 100
+dataname: battery
+model_dir: ${oc.env:MODEL_DIR}/battery_pnr
+save_dir: ${model_dir}
+
+ld_kwargs:
+  step_per_sigma: 10
+  step_size: 0.00005
+
+data:
+  _target_: graphwm.data.BatteryDataset
+  directory: ${oc.env:BAT_TEST_DATASET_DIR}
+  split: ${oc.env:PROJECT_ROOT}/splits/battery/test_50ns.txt
+  mode: rollout
+  recursive_metis: True
+
+hydra:
+  run:
+    dir: ${save_dir}

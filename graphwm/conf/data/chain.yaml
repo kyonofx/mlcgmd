@@ -1,0 +1,52 @@
+name: chain
+dir: ${oc.env:CHAIN_DATASET_DIR}
+dimension: 3
+batch_size: 32
+traj_len: 10000
+recursive_metis: False
+
+
+datamodule:
+  _target_: graphwm.data.datamodule.PLDataModule
+
+  datasets:
+
+    train:
+      _target_: graphwm.data.PolymerDataset
+      split: ${oc.env:PROJECT_ROOT}/splits/chain/train.txt
+      directory: ${data.dir}
+      dilation: ${model.dilation}
+      seq_len: ${model.seq_len}
+      grouping: ${model.cg_level}
+      traj_len: ${data.traj_len}
+      recursive_metis: ${data.recursive_metis}
+
+    val:
+      - _target_: graphwm.data.PolymerDataset
+        split: ${oc.env:PROJECT_ROOT}/splits/chain/val.txt 
+        directory: ${data.dir}
+        dilation: ${model.dilation}
+        seq_len: ${model.seq_len}
+        grouping: ${model.cg_level}
+        traj_len: ${data.traj_len}
+        recursive_metis: ${data.recursive_metis}
+  
+    test:
+      - _target_: graphwm.data.PolymerDataset
+        split: ${oc.env:PROJECT_ROOT}/splits/chain/val.txt 
+        directory: ${data.dir}
+        dilation: ${model.dilation}
+        seq_len: ${model.seq_len}
+        grouping: ${model.cg_level}
+        traj_len: ${data.traj_len}
+        recursive_metis: ${data.recursive_metis}
+  
+  num_workers:
+    train: 16
+    val: 16
+    test: 16
+
+  batch_size:
+    train: ${data.batch_size}
+    val: ${data.batch_size}
+    test: ${data.batch_size}

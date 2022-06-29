@@ -1,0 +1,24 @@
+_target_: graphwm.model.GNS
+name: gns
+# data
+dimension: ${data.dimension}
+use_atom_mass: False
+use_weights: False
+seq_len: 30
+dilation: 1
+num_ptypes: 5
+num_btypes: 0
+cg_level: 100
+radius: 200
+min_std: 0.1
+# networks
+type_emb_size: 32
+dynamics_gn_hparams: {'latent_dim': 128, 'units': 128, 'layers': 2, 'mp_steps': 7}
+embedding_gn_hparams: {'latent_dim': 64, 'units': 64, 'layers': 2, 'mp_steps': 7}
+property_net_hparams: {'units': 256, 'layers': 2, 'out_dim': 1}
+# noise params
+noise_method: multi_scale
+noise_target: pos
+noise_begin: 0.1
+noise_end: 0.01
+noise_level: 10

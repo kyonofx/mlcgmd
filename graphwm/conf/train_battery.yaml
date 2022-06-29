@@ -1,0 +1,27 @@
+expname: ${data.name}_${model.name}
+workdir: ${oc.env:MODEL_DIR}/${expname}
+
+core:
+  version: 0.0.1
+  tags:
+    - mytag
+
+hydra:
+  run:
+    dir: ${workdir}
+
+  sweep:
+    dir: ${workdir}
+    subdir: ${hydra.job.num}_${hydra.job.id}
+
+  job:
+    env_set:
+      WANDB_START_METHOD: thread
+      WANDB_DIR: ./wandb
+
+defaults:
+  - data: battery
+  - model: battery
+  - logging: default
+  - optim: battery
+  - train: battery

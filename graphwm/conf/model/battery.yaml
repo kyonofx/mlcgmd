@@ -1,0 +1,35 @@
+_target_: graphwm.model.PnR
+name: pnr
+# data
+dimension: ${data.dimension}
+use_atom_mass: True
+use_weights: True
+seq_len: 20
+dilation: 100
+num_ptypes: 20
+num_btypes: 100
+cg_level: 7
+radius: 6.0
+min_std: 0.05
+cg_tfsi: False
+remove_com: False
+# networks
+type_emb_size: 32
+score_gn_hparams: {'latent_dim': 128, 'units': 128, 'layers': 2, 'mp_steps': 7}
+dynamics_gn_hparams: {'latent_dim': 128, 'units': 128, 'layers': 2, 'mp_steps': 7}
+embedding_gn_hparams: {'latent_dim': 64, 'units': 64, 'layers': 2, 'mp_steps': 7}
+property_net_hparams: False
+# {'units': 256, 'layers': 2, 'out_dim': 1}
+# ebm noise
+noise_method: multi_scale
+noise_target: pos
+noise_begin: 0.1
+noise_end: 0.01
+noise_level: 20
+sigma_begin: 10.
+sigma_end: 0.01
+sigma_level: 20
+anneal_power: 2.
+# inference hparams 
+step_per_sigma: 10
+step_size: 0.00005
