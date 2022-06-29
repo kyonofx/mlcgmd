@@ -25,7 +25,7 @@ if you find this code useful, please consider reference in your paper:
 
 ## Pretrained model checkpoints
 
-[single-chain CG polymer (param count 1.6M)]()
+[single-chain CG polymer (param count 1.6M)](./ckpts/chain)
 
 ## Installation
 Create a conda environment with the required dependencies. This may take a few minutes.
