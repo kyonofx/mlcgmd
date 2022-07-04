@@ -56,7 +56,7 @@ The solid polymer electrolyte dataset will be released in a future publication, 
 
 ## Configure environment variables
 
-Before running training/evaluation of the GNN simulator, make a copy of the `.env.template` file and rename it to `.env`. Modify the following environment variables in `.env`.
+Before running training/evaluation of the GNN simulator, make a copy of the `.env.template` file and rename it to `.env`. Modify the following environment variables in `.env`, and copy it to `mlcgmd/graphwm/.env`.
 
 - `PROJECT_ROOT`: path to the folder that contains this repo
 - `CHAIN_DATASET_DIR`: path to the single-chain polymer training dataset (50k $\tau$)
@@ -85,7 +85,7 @@ For the [battery dataset](./graphwm/conf/train_battery.yaml), use:
 python train.py --config-name train_battery
 ```
 
-We use `hydra` for config management. Command line argument can be passed in conveniently. For example, if you want to a higher radius cut-off of `9.0`, with the battery dataset, simply do:
+We use `hydra` for config management. Command-line argument can be passed in conveniently. For example, if you want to a higher radius cut-off of `9.0`, with the battery dataset, simply do:
 
 ```
 python train.py --config-name train_battery model.radius=9
@@ -107,16 +107,16 @@ For the battery dataset, run:
 python eval.py --config-name eval_battery
 ```
 
-Note that the simulation code assumes your model is saved as `{data.name}_{model.name}*`. The rollout trajectories are saved as a torch pickle file. Simulation efficiency is maximized when using a large batch size to parallelize simulation of many systems on a single GPU. Simulating all 40 testing class-II polymers for 5M τ using one a single RTX 2080 Ti GPU takes roughly 2.6 hours. Simulating all 50 testing batteries for 50 ns using one single RTX 2080 Ti GPU takes roughly 4.6 hours.
+Note that the simulation code assumes your model is saved as `{data.name}_{model.name}*`. The rollout trajectories are saved as a torch pickle file. Simulation efficiency is maximized when using a large batch size to parallelize the simulation of many systems on a single GPU. Simulating all 40 testing class-II polymers for 5M τ using a single RTX 2080 Ti GPU takes roughly 2.6 hours. Simulating all 50 testing batteries for 50 ns using one single RTX 2080 Ti GPU takes roughly 4.6 hours.
 
 The `ld_kwargs` in the config file controls the inference process of the score-based refinement module. They are only used with the `PnR` model class.
 
 ## Tips
 
 - Training CGMD simulators is data I/O intensive. Training speed will be greatly improved with a faster file system. For example, local drive is usually a lot faster than NFS/AFS. 
-- The hyperparameter `model.cg_level` controls how many atoms are grouped into a coarse-grained beads. We use METIS for coarse-graining -- this algorithm tries to make the number of atoms assigned to each CG-bead equal. But this may not be achieved as atoms not connected by a chemical bond are never grouped together.  If `model.cg_level=1`, coarse-graining is turned off.
+- The hyperparameter `model.cg_level` controls how many atoms are grouped into a coarse-grained bead. We use METIS for coarse-graining -- this algorithm tries to make the number of atoms assigned to each CG-bead equal. But this may not be achieved as atoms not connected by a chemical bond are never grouped together.  If `model.cg_level=1`, coarse-graining is turned off.
 - multi-gpu training can be turned on by setting `train.pl_trainer.gpus=X`, where `X` is the number of GPUs.
-- The hyperparameter `model.dilation` controls the time-integration step. It specifies the number of **recorded steps** that the ML simulator predicts over in a single step. More information about length of recorded steps is in the next section.
+- The hyperparameter `model.dilation` controls the time-integration step. It specifies the number of **recorded steps** that the ML simulator predicts over in a single step. More information about the length of recorded steps is in the next section.
 
 ## More about the datasets 
 
@@ -126,7 +126,7 @@ The recording frequency for the single-chain polymer is 5 τ. for the training s
 
 The recording frequency for the battery dataset is 2 ps for both the training and the test sets. The integrator used in the LAMMPS simulation is a rRESPA multi-timescale integrator with an outer timestep of 2 fs for non-bonded interactions, and an inner timestep of 0.5 fs. Our default config uses `dilation=100`, so one step of our learned simulator is 0.2 ns, which is as long as $10^5$ steps in the LAMMPS simulation.
 
-The orginal MD trajectories was simulated using [LAMMPS](https://www.lammps.org). Under [graphwm/preprocess](./graphwm/preprocess) you can find the scripts for preprocessing the raw LAMMPS dump to the `.h5` files that are used for our learned simulators. To use the preprocessing functionality `mdtraj` needs to be installed through: `pip install mdtraj`.
+The orginal MD trajectories were simulated using [LAMMPS](https://www.lammps.org). Under [graphwm/preprocess](./graphwm/preprocess) you can find the scripts for preprocessing the raw LAMMPS dump to the `.h5` files that are used for our learned simulators. To use the preprocessing functionality, `mdtraj` needs to be installed through: `pip install mdtraj`.
 
 ## Related repos
 
