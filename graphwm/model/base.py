@@ -19,7 +19,7 @@ class GraphSim(pl.LightningModule):
     super().__init__()
     self.save_hyperparameters()
     self.latent_dim = self.hparams.dynamics_gn_hparams['latent_dim']
-    self.use_coarse_graining = (self.hparams.cg_level > 1) or self.hparams.use_keypoint_for_cg
+    self.use_coarse_graining = (self.hparams.cg_level > 1) or ('use_keypoint_for_cg' in self.hparams and self.hparams.use_keypoint_for_cg)
 
     # particle masses.
     if self.hparams.use_atom_mass:
