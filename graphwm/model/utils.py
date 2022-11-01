@@ -79,6 +79,7 @@ def compute_weighted_rgs(positions, weights, n_node):
   Outputs:
       rgs: B x 1
   """
+  weights = weights.view(-1, 1)
   positions_per_graph_list = torch.split(positions, list(n_node), dim=0)
   weights_per_graph_list = torch.split(weights, list(n_node), dim=0)
   all_rgs = []
