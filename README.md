@@ -1,4 +1,4 @@
-# Learning to Simulate Time-integrated Coarse-grained Molecular Dynamics (MLCGMD) [TMLR 2023]
+# Learning to Simulate Time-integrated Coarse-grained Molecular Dynamics with Multi-scale Graph Networks [TMLR 2023]
 
 <p align="center">
 <img src="assets/chain.gif" width="300">
