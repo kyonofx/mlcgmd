@@ -1,4 +1,4 @@
-# Learning to Simulate Time-integrated Coarse-grained Molecular Dynamics (MLCGMD)
+# Learning to Simulate Time-integrated Coarse-grained Molecular Dynamics (MLCGMD) [TMLR 2023]
 
 <p align="center">
 <img src="assets/chain.gif" width="300">
@@ -10,22 +10,28 @@ This codebase implements multi-scale GNN simulators for time-integrated CGMD, wi
   <img src="assets/model.png" /> 
 </p>
 
-[[Paper]](https://arxiv.org/abs/2204.10348) [[Website]](https://xiangfu.co/mlcgmd) [[Video]](https://www.youtube.com/watch?v=l3aGVjQezsc)
+[[Paper]](https://openreview.net/forum?id=y8RZoPjEUl) [[Website]](https://xiangfu.co/mlcgmd) [[Video]](https://www.youtube.com/watch?v=l3aGVjQezsc)
 
 if you find this code useful, please consider reference in your paper:
 
 ```
-@article{fu2022simulate,
-  title={Simulate Time-integrated Coarse-grained Molecular Dynamics with Geometric Machine Learning},
-  author={Fu, Xiang and Xie, Tian and Rebello, Nathan J and Olsen, Bradley D and Jaakkola, Tommi},
-  journal={arXiv preprint arXiv:2204.10348},
-  year={2022}
+@article{
+fu2023simulate,
+title={Simulate Time-integrated Coarse-grained Molecular Dynamics with Multi-scale Graph Networks},
+author={Xiang Fu and Tian Xie and Nathan J. Rebello and Bradley Olsen and Tommi S. Jaakkola},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2023},
+url={https://openreview.net/forum?id=y8RZoPjEUl},
+note={}
 }
 ``` 
 
 ## Pretrained model checkpoints
 
 [single-chain CG polymer (param count 1.6M)](./ckpts/chain)
+[solid polymer electrolytes (param count 1.6M)](./ckpts/battery)
+
 
 ## Installation
 Create a conda environment with the required dependencies. This may take a few minutes.
@@ -52,7 +58,7 @@ Our single-chain CG polymer dataset is available from Zenodo.
 
 [single-chain CG polymer dataset](https://zenodo.org/record/6764836#.YrqHNuxKjzd)
 
-The solid polymer electrolyte dataset will be released in a future publication, and can be requested from the original authors.
+The solid polymer electrolyte dataset is available through [here](https://arxiv.org/abs/2208.01692).
 
 ## Configure environment variables
 
